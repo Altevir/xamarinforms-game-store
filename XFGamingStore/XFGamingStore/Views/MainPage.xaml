@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?hotReload preview.on?>
+<ContentPage
+    x:Class="XFGamingStore.Views.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cardview="clr-namespace:PanCardView;assembly=PanCardView"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:fonticons="clr-namespace:XFGamingStore.Helpers"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:XFGamingStore.Models"
+    xmlns:proc="clr-namespace:PanCardView.Processors;assembly=PanCardView"
+    xmlns:viewmodels="clr-namespace:XFGamingStore.ViewModels"
+    ios:Page.UseSafeArea="False"
+    x:DataType="viewmodels:MainPageViewModel"
+    NavigationPage.HasNavigationBar="False"
+    mc:Ignorable="d">
+
+    <Grid>
+        <Image
+            x:Name="lbImgBackground"
+            Aspect="Fill"
+            Source="{Binding ImageBackground}" />
+        <BoxView IsVisible="{OnPlatform Android='True', iOS='False'}">
+            <BoxView.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Offset="1" Color="Transparent" />
+                    <GradientStop Offset="1" Color="Transparent" />
+                    <GradientStop Offset="0.65" Color="Black" />
+                    <GradientStop Offset="0.65" Color="Black" />
+                </LinearGradientBrush>
+            </BoxView.Background>
+        </BoxView>
+        <BoxView IsVisible="{OnPlatform iOS='True', Android='False'}">
+            <BoxView.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Offset="0.1" Color="Transparent" />
+                    <GradientStop Offset="0.65" Color="Black" />
+                </LinearGradientBrush>
+            </BoxView.Background>
+        </BoxView>
+        <ScrollView>
+            <Grid RowDefinitions="auto, auto, *, 38, auto">
+                <Grid
+                    Grid.Row="0"
+                    Margin="20,50,20,20"
+                    HorizontalOptions="End"
+                    RowSpacing="0">
+                    <BoxView
+                        BackgroundColor="{StaticResource colorYellowFEC}"
+                        HeightRequest="50"
+                        HorizontalOptions="Center"
+                        WidthRequest="50">
+                        <BoxView.Clip>
+                            <EllipseGeometry
+                                Center="25,25"
+                                RadiusX="25"
+                                RadiusY="25" />
+                        </BoxView.Clip>
+                    </BoxView>
+                    <Image
+                        Aspect="AspectFill"
+                        HeightRequest="44"
+                        HorizontalOptions="Center"
+                        Source="user.png"
+                        VerticalOptions="Center"
+                        WidthRequest="44">
+                        <Image.Clip>
+                            <EllipseGeometry
+                                Center="22,22"
+                                RadiusX="22"
+                                RadiusY="22" />
+                        </Image.Clip>
+                    </Image>
+                </Grid>
+                <cardview:CoverFlowView
+                    x:Name="coverFlowView"
+                    Grid.Row="1"
+                    Margin="0,0,0,0"
+                    IsCyclical="false"
+                    ItemsSource="{Binding Games}"
+                    PositionShiftValue="90"
+                    PropertyChanged="CoverFlowView_PropertyChanged">
+                    <x:Arguments>
+                        <proc:CoverFlowProcessor ScaleFactor="0.75" />
+                    </x:Arguments>
+                    <cardview:CoverFlowView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Game">
+                            <Grid Margin="60,0" RowDefinitions="*, auto">
+                                <Frame
+                                    Grid.Row="0"
+                                    Padding="0"
+                                    CornerRadius="18"
+                                    HasShadow="False"
+                                    IsClippedToBounds="True">
+                                    <Image
+                                        Aspect="Fill"
+                                        HeightRequest="300"
+                                        Source="{Binding image}" />
+                                </Frame>
+                                <StackLayout
+                                    Grid.Row="1"
+                                    Margin="0,10,0,0"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Orientation="Horizontal">
+                                    <Label
+                                        FontFamily="MaterialIcons"
+                                        FontSize="30"
+                                        HorizontalOptions="Start"
+                                        IsVisible="{Binding android}"
+                                        Text="{x:Static fonticons:FontIcons.Android}"
+                                        TextColor="{StaticResource colorWhite}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        FontFamily="MaterialIcons"
+                                        FontSize="28"
+                                        HorizontalOptions="Start"
+                                        IsVisible="{Binding appleIOS}"
+                                        Text="{x:Static fonticons:FontIcons.AppleIos}"
+                                        TextColor="{StaticResource colorWhite}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        FontFamily="MaterialIcons"
+                                        FontSize="30"
+                                        HorizontalOptions="Start"
+                                        IsVisible="{Binding sonyPlaystation}"
+                                        Text="{x:Static fonticons:FontIcons.SonyPlaystation}"
+                                        TextColor="{StaticResource colorWhite}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        FontFamily="MaterialIcons"
+                                        FontSize="24"
+                                        HorizontalOptions="Start"
+                                        IsVisible="{Binding xBox}"
+                                        Text="{x:Static fonticons:FontIcons.MicrosoftXbox}"
+                                        TextColor="{StaticResource colorWhite}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        FontFamily="MaterialIcons"
+                                        FontSize="24"
+                                        HorizontalOptions="Start"
+                                        IsVisible="{Binding xBox}"
+                                        Text="{x:Static fonticons:FontIcons.NintendoSwitch}"
+                                        TextColor="{StaticResource colorWhite}"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        FontFamily="MaterialIcons"
+                                        FontSize="22"
+                                        HorizontalOptions="Start"
+                                        IsVisible="{Binding pc}"
+                                        Text="{x:Static fonticons:FontIcons.MicrosoftWindows}"
+                                        TextColor="{StaticResource colorWhite}"
+                                        VerticalOptions="Center" />
+                                </StackLayout>
+                            </Grid>
+                        </DataTemplate>
+                    </cardview:CoverFlowView.ItemTemplate>
+                </cardview:CoverFlowView>
+                <Grid
+                    Grid.Row="2"
+                    Margin="20,20,20,20"
+                    ColumnDefinitions="auto, *"
+                    RowDefinitions="auto, auto">
+                    <Label
+                        x:Name="lbName"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        FontFamily="MontSerratMedium"
+                        FontSize="{OnPlatform Android='24',
+                                              iOS='28'}"
+                        HorizontalOptions="Start"
+                        Text="{Binding Name}"
+                        TextColor="{StaticResource colorWhite}" />
+                    <Label
+                        x:Name="lbIconPlayCircle"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        FontFamily="MaterialIcons"
+                        FontSize="32"
+                        HorizontalOptions="Start"
+                        Text="{x:Static fonticons:FontIcons.PlayCircle}"
+                        TextColor="{StaticResource colorWhite}"
+                        VerticalOptions="Center" />
+                    <Label
+                        x:Name="lbDescription"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                        FontFamily="NunitoLight"
+                        FontSize="{OnPlatform Android='14',
+                                              iOS='16'}"
+                        HorizontalOptions="FillAndExpand"
+                        LineBreakMode="TailTruncation"
+                        MaxLines="6"
+                        Text="{Binding Description}"
+                        TextColor="{StaticResource colorWhite}" />
+                </Grid>
+                <Grid
+                    Grid.Row="3"
+                    Margin="20,0"
+                    ColumnDefinitions="*, *"
+                    HeightRequest="34">
+                    <Frame
+                        Grid.Column="0"
+                        Margin="0,0,5,0"
+                        Padding="10,5"
+                        BackgroundColor="{StaticResource colorYellowFEC}"
+                        CornerRadius="0"
+                        HasShadow="False"
+                        HeightRequest="34"
+                        HorizontalOptions="FillAndExpand">
+                        <Label
+                            FontFamily="NunitoSemiBold"
+                            FontSize="16"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Center"
+                            Text="BUY NOW"
+                            TextColor="{StaticResource colorBlack}"
+                            VerticalOptions="CenterAndExpand"
+                            VerticalTextAlignment="Center" />
+                    </Frame>
+                    <Frame
+                        Grid.Column="1"
+                        Margin="5,0,0,0"
+                        Padding="10,5"
+                        BackgroundColor="Transparent"
+                        BorderColor="{StaticResource colorYellowFEC}"
+                        CornerRadius="0"
+                        HasShadow="False"
+                        HeightRequest="34"
+                        HorizontalOptions="FillAndExpand">
+                        <Label
+                            FontFamily="NunitoSemiBold"
+                            FontSize="16"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Center"
+                            Text="WATCH TRAILER"
+                            TextColor="{StaticResource colorWhite}"
+                            VerticalOptions="CenterAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding OpenVideoTrailerCommand}"
+                                CommandParameter="{Binding Source={x:Reference coverFlowView}, Path=SelectedIndex}"
+                                NumberOfTapsRequired="1" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </Grid>
+                <Grid
+                    Grid.Row="4"
+                    Margin="0,30,0,40"
+                    ColumnDefinitions="*, *, *, *">
+                    <Label
+                        Grid.Column="0"
+                        FontFamily="MaterialIcons"
+                        FontSize="{OnPlatform Android='26',
+                                              iOS='32'}"
+                        HorizontalOptions="Center"
+                        Text="{x:Static fonticons:FontIcons.Trophy}"
+                        TextColor="{StaticResource colorWhite}"
+                        VerticalOptions="Center" />
+                    <Frame
+                        Grid.Column="0"
+                        Margin="20,-12,0,0"
+                        Padding="0"
+                        BackgroundColor="{StaticResource colorYellowFDD}"
+                        CornerRadius="10"
+                        HasShadow="False"
+                        HeightRequest="20"
+                        HorizontalOptions="Center"
+                        IsClippedToBounds="True"
+                        VerticalOptions="Start"
+                        WidthRequest="20">
+                        <Label
+                            Margin="{OnPlatform Android='0.5,1,0,1',
+                                                iOS='0.5,1,0,0'}"
+                            FontFamily="NunitoSemiBold"
+                            FontSize="10"
+                            HorizontalOptions="Center"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding Trophies}"
+                            TextColor="{StaticResource colorBlack}"
+                            VerticalOptions="Center" />
+                    </Frame>
+                    <Label
+                        Grid.Column="1"
+                        Margin="4,-10,0,0"
+                        FontFamily="MaterialIcons"
+                        FontSize="{OnPlatform Android='26',
+                                              iOS='32'}"
+                        HorizontalOptions="Center"
+                        Text="{x:Static fonticons:FontIcons.Chat}"
+                        TextColor="{StaticResource colorWhite}"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Column="1"
+                        Margin="18,0,0,0"
+                        FontFamily="MaterialIcons"
+                        FontSize="{OnPlatform Android='26',
+                                              iOS='32'}"
+                        HorizontalOptions="Center"
+                        RotationY="180"
+                        Text="{x:Static fonticons:FontIcons.Chat}"
+                        TextColor="{StaticResource colorWhite}"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Column="2"
+                        Margin="4,0,0,0"
+                        FontFamily="MaterialIcons"
+                        FontSize="{OnPlatform Android='26',
+                                              iOS='32'}"
+                        HorizontalOptions="Center"
+                        Text="{x:Static fonticons:FontIcons.Discord}"
+                        TextColor="{StaticResource colorWhite}"
+                        VerticalOptions="Center" />
+                    <Label
+                        Grid.Column="3"
+                        Margin="4,0,0,0"
+                        FontFamily="MaterialIcons"
+                        FontSize="{OnPlatform Android='26',
+                                              iOS='32'}"
+                        HorizontalOptions="Center"
+                        Text="{x:Static fonticons:FontIcons.Menu}"
+                        TextColor="{StaticResource colorWhite}"
+                        VerticalOptions="Center" />
+                </Grid>
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>
