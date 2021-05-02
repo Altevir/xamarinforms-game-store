@@ -6,7 +6,7 @@ O que foi usado no desenvolvimento:
 ### O design (créditos no final da página) foi pego como base e efetuado alterações como:
 - Efeito (Fade) de transição no título, descrição e imagem de fundo
 - Adicionado ícones para informar pra qual(is) plataforma(s) o jogo é compatível
-- Posição das imagens (Centralizada) ao selecionar cada item no Carousel
+- Posição das imagens (centralizadas) no Carousel
 - Exibição da quantidade de Troféus por jogo através de um contador (Badge)
 
 ## Screenshots
